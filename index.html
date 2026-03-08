@@ -430,7 +430,7 @@ body { font-family:'Sora',sans-serif; background:var(--bg); color:var(--text1); 
     <div class="screen" id="screen-portfolio">
       <div class="content">
         <div class="perf-grid">
-          <div class="stat-card"><div class="stat-label" style="margin-top:0;">Total Portfolio Value</div><div class="stat-value" style="font-size:22px;margin-top:6px;">S$1,284,500</div><div style="font-size:12px;color:var(--green);margin-top:4px;">▲ S$29,543 today</div></div>
+          <div class="stat-card"><div class="stat-label" style="margin-top:0;">Total Portfolio Value</div><div class="stat-value portfolio-total-value" style="font-size:22px;margin-top:6px;">S$1,284,500</div><div style="font-size:12px;color:var(--green);margin-top:4px;">▲ S$29,543 today</div></div>
           <div class="stat-card"><div class="stat-label" style="margin-top:0;">Year-to-Date Return</div><div class="stat-value" style="font-size:22px;margin-top:6px;color:var(--green);">+12.1%</div><div style="font-size:12px;color:var(--text2);margin-top:4px;">vs benchmark +9.4%</div></div>
           <div class="stat-card"><div class="stat-label" style="margin-top:0;">Unrealised Gain/Loss</div><div class="stat-value" style="font-size:22px;margin-top:6px;color:var(--green);">+S$138,220</div><div style="font-size:12px;color:var(--text2);margin-top:4px;">Since inception · 3 years</div></div>
         </div>
@@ -497,10 +497,30 @@ body { font-family:'Sora',sans-serif; background:var(--bg); color:var(--text1); 
           </div>
           <div class="card" style="padding:24px;">
             <div class="card-title" style="margin-bottom:4px;">Score Breakdown</div>
-            <div class="metric-row"><div class="metric-row-top"><span class="metric-row-name">Diversification</span><span class="metric-row-score" style="color:#1DB87A;">82</span></div><div style="font-size:11px;color:var(--text2);margin-bottom:6px;">Spread across 5 asset classes and 3 geographies.</div><div class="bar-track" style="height:6px;"><div class="bar-fill" style="width:82%;background:#1DB87A;"></div></div></div>
-            <div class="metric-row"><div class="metric-row-top"><span class="metric-row-name">Liquidity Ratio</span><span class="metric-row-score" style="color:#F5A623;">61</span></div><div style="font-size:11px;color:var(--text2);margin-bottom:6px;">Liquid assets cover 2.1 months of expenses. Target: 3 months.</div><div class="bar-track" style="height:6px;"><div class="bar-fill" style="width:61%;background:#F5A623;"></div></div></div>
-            <div class="metric-row"><div class="metric-row-top"><span class="metric-row-name">Volatility Exposure</span><span class="metric-row-score" style="color:#3A7BD5;">70</span></div><div style="font-size:11px;color:var(--text2);margin-bottom:6px;">Moderate-high mix. Crypto allocation elevates risk slightly.</div><div class="bar-track" style="height:6px;"><div class="bar-fill" style="width:70%;background:#3A7BD5;"></div></div></div>
-            <div class="metric-row"><div class="metric-row-top"><span class="metric-row-name">Behavioral Resilience</span><span class="metric-row-score" style="color:#9B6DFF;">68</span></div><div style="font-size:11px;color:var(--text2);margin-bottom:6px;">Historically stable. One panic-sell event in 2023 noted.</div><div class="bar-track" style="height:6px;"><div class="bar-fill" style="width:68%;background:#9B6DFF;"></div></div></div>
+            <div class="metric-row">
+              <div class="metric-row-top"><span class="metric-row-name">Diversification</span><span class="metric-row-score wellness-div-score" style="color:#1DB87A;">82</span></div>
+              <div style="font-size:11px;color:var(--text2);margin-bottom:6px;" id="wellness-div-desc">Spread across 5 asset classes and 3 geographies.</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:6px;font-style:italic;" id="wellness-div-calc">Calculation: Starts at 82. Penalized 4 points for each allocation 5%+ off target, 8 points for 10%+ off target.</div>
+              <div class="bar-track" style="height:6px;"><div class="bar-fill wellness-div-bar" style="width:82%;background:#1DB87A;"></div></div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-row-top"><span class="metric-row-name">Liquidity Ratio</span><span class="metric-row-score wellness-liq-score" style="color:#F5A623;">61</span></div>
+              <div style="font-size:11px;color:var(--text2);margin-bottom:6px;" id="wellness-liq-desc">Liquid assets cover 2.1 months of expenses. Target: 3 months.</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:6px;font-style:italic;" id="wellness-liq-calc">Calculation: (Months covered ÷ 3 months target) × 75, capped at 100. You have S$284,200 in cash.</div>
+              <div class="bar-track" style="height:6px;"><div class="bar-fill wellness-liq-bar" style="width:61%;background:#F5A623;"></div></div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-row-top"><span class="metric-row-name">Volatility Exposure</span><span class="metric-row-score wellness-vol-score" style="color:#3A7BD5;">70</span></div>
+              <div style="font-size:11px;color:var(--text2);margin-bottom:6px;" id="wellness-vol-desc">Moderate-high mix. Crypto allocation elevates risk slightly.</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:6px;font-style:italic;" id="wellness-vol-calc">Calculation: Starts at 70. Crypto >5%: -7pts, >10%: -15pts. Equities >40%: -5pts, >50%: -10pts.</div>
+              <div class="bar-track" style="height:6px;"><div class="bar-fill wellness-vol-bar" style="width:70%;background:#3A7BD5;"></div></div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-row-top"><span class="metric-row-name">Behavioral Resilience</span><span class="metric-row-score wellness-beh-score" style="color:#9B6DFF;">68</span></div>
+              <div style="font-size:11px;color:var(--text2);margin-bottom:6px;" id="wellness-beh-desc">Historically stable. One panic-sell event in 2023 noted.</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:6px;font-style:italic;" id="wellness-beh-calc">Calculation: Fixed score based on historical trading behavior and discipline during market volatility.</div>
+              <div class="bar-track" style="height:6px;"><div class="bar-fill wellness-beh-bar" style="width:68%;background:#9B6DFF;"></div></div>
+            </div>
           </div>
         </div>
         <div class="wellness-bottom">
@@ -784,6 +804,8 @@ function renderAll() {
 function renderHero() {
   const hw = document.querySelector('.hero-value');
   if (hw) hw.textContent = 'S$' + portfolioState.total.toLocaleString();
+  const pv = document.querySelector('.portfolio-total-value');
+  if (pv) pv.textContent = 'S$' + portfolioState.total.toLocaleString();
 }
 
 function renderStatCards() {
@@ -972,44 +994,147 @@ function recalcWellness() {
   const total = portfolioState.total;
   const targets = portfolioState.targetAllocations;
 
+  // Handle newly created accounts with no assets (total = 0)
+  const isNewAccount = (total === 0 || portfolioState.assets.length === 0);
+
   // Diversification: penalise for overweight/underweight vs targets
-  let divScore = 82;
+  let divScore = isNewAccount ? 0 : 82;
+  let divPenalties = [];
   Object.keys(targets).forEach(t => {
     const diff = Math.abs((alloc[t]||0) - targets[t]);
-    if (diff > 5)  divScore -= 4;
-    if (diff > 10) divScore -= 4;
+    if (diff > 5)  { divScore -= 4; divPenalties.push(t); }
+    if (diff > 10) { divScore -= 4; }
   });
-  divScore = Math.max(20, Math.min(100, divScore));
+  divScore = Math.max(0, Math.min(100, divScore));
 
   // Liquidity: months of expenses covered (target 3 months)
   const months = portfolioState.monthsCovered;
-  let liqScore = Math.round(Math.min(100, (months / 3) * 75));
+  let liqScore = isNewAccount ? 0 : Math.round(Math.min(100, (months / 3) * 75));
 
   // Volatility: penalise for high crypto/equity concentration
   const cryptoPct = alloc.crypto || 0;
   const eqPct = alloc.equities || 0;
-  let volScore = 70;
-  if (cryptoPct > 10) volScore -= 15;
-  else if (cryptoPct > 5) volScore -= 7;
-  if (eqPct > 50) volScore -= 10;
-  else if (eqPct > 40) volScore -= 5;
-  volScore = Math.max(20, Math.min(100, volScore));
+  let volScore = isNewAccount ? 0 : 70;
+  let volPenalty = '';
+  if (cryptoPct > 10) { volScore -= 15; volPenalty = 'crypto >10%'; }
+  else if (cryptoPct > 5) { volScore -= 7; volPenalty = 'crypto >5%'; }
+  if (eqPct > 50) { volScore -= 10; volPenalty += (volPenalty ? ', equities >50%' : 'equities >50%'); }
+  else if (eqPct > 40) { volScore -= 5; volPenalty += (volPenalty ? ', equities >40%' : 'equities >40%'); }
+  volScore = Math.max(0, Math.min(100, volScore));
 
   // Behavioural stays fixed (based on history, not allocation)
-  const behScore = 68;
+  const behScore = isNewAccount ? 0 : 68;
 
   portfolioState.wellnessScores.diversification = divScore;
   portfolioState.wellnessScores.liquidity = liqScore;
   portfolioState.wellnessScores.volatility = volScore;
+  portfolioState.wellnessScores.behavioural = behScore;
 
-  // Update DOM — wellness dashboard metric bars
-  const bars = document.querySelectorAll('.bar-fill');
-  const vals = document.querySelectorAll('.metric-val');
-  const scores = [divScore, liqScore, volScore, behScore];
-  scores.forEach((s,i) => {
-    if (bars[i]) bars[i].style.width = s + '%';
-    if (vals[i]) vals[i].textContent = s;
-  });
+  // Update detailed descriptions
+  const assetClassCount = Object.keys(alloc).length;
+  const divDesc = document.getElementById('wellness-div-desc');
+  if (divDesc) {
+    if (isNewAccount) {
+      divDesc.textContent = 'No assets yet. Add your first asset to start building your portfolio.';
+    } else {
+      divDesc.textContent = `Spread across ${assetClassCount} asset class${assetClassCount !== 1 ? 'es' : ''}. ${divPenalties.length > 0 ? 'Some allocations are off target.' : 'Allocations are close to targets.'}`;
+    }
+  }
+
+  const divCalc = document.getElementById('wellness-div-calc');
+  if (divCalc) {
+    if (isNewAccount) {
+      divCalc.textContent = 'Calculation: Start at 0. Add assets and diversify across different asset classes to increase this score.';
+    } else {
+      const penaltyCount = divPenalties.length;
+      divCalc.textContent = `Calculation: Starts at 82${penaltyCount > 0 ? `, penalized ${penaltyCount * 4}-${penaltyCount * 8} points for allocations off target` : ', no penalties applied'}.`;
+    }
+  }
+
+  const liqCash = portfolioState.liquidCash;
+  const liqDesc = document.getElementById('wellness-liq-desc');
+  if (liqDesc) {
+    if (isNewAccount) {
+      liqDesc.textContent = 'No liquid cash yet. Build an emergency fund covering 3+ months of expenses.';
+    } else {
+      liqDesc.textContent = `Liquid assets cover ${months.toFixed(1)} months of expenses. Target: 3 months.`;
+    }
+  }
+
+  const liqCalc = document.getElementById('wellness-liq-calc');
+  if (liqCalc) {
+    if (isNewAccount) {
+      liqCalc.textContent = `Calculation: (Cash ÷ Monthly expenses ÷ 3) × 75. You need S$${(portfolioState.monthlyExpenses * 3).toLocaleString()} for a 3-month emergency fund.`;
+    } else {
+      liqCalc.textContent = `Calculation: (${months.toFixed(1)} months ÷ 3 target) × 75 = ${liqScore}. You have S$${liqCash.toLocaleString()} in cash.`;
+    }
+  }
+
+  const volDesc = document.getElementById('wellness-vol-desc');
+  if (volDesc) {
+    if (isNewAccount) {
+      volDesc.textContent = 'No assets to evaluate. Lower volatility = more stable portfolio.';
+    } else if (volPenalty) {
+      volDesc.textContent = `Moderate-high risk. ${volPenalty.charAt(0).toUpperCase() + volPenalty.slice(1)} increases volatility.`;
+    } else {
+      volDesc.textContent = 'Balanced risk profile. Crypto and equity allocations are within healthy ranges.';
+    }
+  }
+
+  const volCalc = document.getElementById('wellness-vol-calc');
+  if (volCalc) {
+    if (isNewAccount) {
+      volCalc.textContent = 'Calculation: Starts at 0. As you add assets, keep crypto <5% and equities <40% for a healthier score.';
+    } else {
+      volCalc.textContent = `Calculation: Starts at 70. ${cryptoPct > 10 ? 'Crypto >10%: -15pts' : cryptoPct > 5 ? 'Crypto >5%: -7pts' : 'Crypto OK'}. ${eqPct > 50 ? 'Equities >50%: -10pts' : eqPct > 40 ? 'Equities >40%: -5pts' : 'Equities OK'}.`;
+    }
+  }
+
+  const behDesc = document.getElementById('wellness-beh-desc');
+  if (behDesc) {
+    if (isNewAccount) {
+      behDesc.textContent = 'No trading history yet. This score reflects your discipline during market volatility.';
+    } else {
+      behDesc.textContent = 'Historically stable. One panic-sell event in 2023 noted.';
+    }
+  }
+
+  const behCalc = document.getElementById('wellness-beh-calc');
+  if (behCalc) {
+    if (isNewAccount) {
+      behCalc.textContent = 'Calculation: Starts at 0 for new accounts. Improves as you demonstrate disciplined trading behavior over time.';
+    } else {
+      behCalc.textContent = 'Calculation: Fixed score (68/100) based on historical trading behavior and discipline during market volatility.';
+    }
+  }
+
+  // Update DOM — wellness dashboard metric bars with colors
+  const divBar = document.querySelector('.wellness-div-bar');
+  const liqBar = document.querySelector('.wellness-liq-bar');
+  const volBar = document.querySelector('.wellness-vol-bar');
+  const behBar = document.querySelector('.wellness-beh-bar');
+
+  const divScoreEl = document.querySelector('.wellness-div-score');
+  const liqScoreEl = document.querySelector('.wellness-liq-score');
+  const volScoreEl = document.querySelector('.wellness-vol-score');
+  const behScoreEl = document.querySelector('.wellness-beh-score');
+
+  function getScoreColor(score) {
+    if (score >= 80) return '#1DB87A';
+    if (score >= 60) return '#3A7BD5';
+    if (score >= 40) return '#F5A623';
+    return '#E0483D';
+  }
+
+  if (divBar) { divBar.style.width = divScore + '%'; divBar.style.background = getScoreColor(divScore); }
+  if (liqBar) { liqBar.style.width = liqScore + '%'; liqBar.style.background = getScoreColor(liqScore); }
+  if (volBar) { volBar.style.width = volScore + '%'; volBar.style.background = getScoreColor(volScore); }
+  if (behBar) { behBar.style.width = behScore + '%'; behBar.style.background = getScoreColor(behScore); }
+
+  if (divScoreEl) { divScoreEl.textContent = divScore; divScoreEl.style.color = getScoreColor(divScore); }
+  if (liqScoreEl) { liqScoreEl.textContent = liqScore; liqScoreEl.style.color = getScoreColor(liqScore); }
+  if (volScoreEl) { volScoreEl.textContent = volScore; volScoreEl.style.color = getScoreColor(volScore); }
+  if (behScoreEl) { behScoreEl.textContent = behScore; behScoreEl.style.color = getScoreColor(behScore); }
 
   // Update gauge score
   const overall = portfolioState.wellnessScore;
@@ -1020,10 +1145,10 @@ function recalcWellness() {
   // Update wellness status label
   const statusEl = document.querySelector('.wellness-status');
   if (statusEl) {
-    if (overall >= 80) statusEl.textContent = 'Excellent ✓';
-    else if (overall >= 65) statusEl.textContent = 'Well Diversified ✓';
-    else if (overall >= 50) statusEl.textContent = 'Needs Attention ⚠';
-    else statusEl.textContent = 'At Risk ⚠';
+    if (overall >= 80) { statusEl.textContent = 'Excellent ✓'; statusEl.style.color = '#1DB87A'; }
+    else if (overall >= 65) { statusEl.textContent = 'Well Diversified ✓'; statusEl.style.color = '#1DB87A'; }
+    else if (overall >= 50) { statusEl.textContent = 'Needs Attention ⚠'; statusEl.style.color = '#F5A623'; }
+    else { statusEl.textContent = 'At Risk ⚠'; statusEl.style.color = '#E0483D'; }
   }
 }
 
